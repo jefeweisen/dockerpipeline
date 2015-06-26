@@ -1,7 +1,7 @@
 {
   "_comment" : "FOR DETAILED FORMAT LOOK AT https://docs.docker.com/reference/api/docker_remote_api_v1.16/#create-a-container",
   "Cmd": [
-    "java", "-agentlib:jdwp=transport=dt_socket,address=4000,suspend=n,server=y", "-cp", "/var/lib/dockerpipeline.jar", "org.allenai.pipeline.examples.CountWordsAndLinesPipeline"
+    "java", "-agentlib:jdwp=transport=dt_socket,address=4000,suspend=n,server=y", "-jar", "/var/lib/dockerpipeline.jar"
   ],
   "HostConfig": {
     "PortBindings":{ "8080/tcp": [{ "HostIp": "0.0.0.0", "HostPort": "18080" }],
