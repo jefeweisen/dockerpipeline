@@ -9,6 +9,9 @@ import java.io.File
 
 /** A simple pipeline that counts words and lines in a text file */
 object CountWordsAndLinesPipeline extends App {
+  System.out.println("hello docker")
+
+  Thread.sleep(10001)
   // Create a pipeline.  Specify the output directory where data will be written
   val pipeline = Pipeline(new File("pipeline-output"))
 
