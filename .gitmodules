@@ -1,4 +1,4 @@
 [submodule "chvdocker"]
 	path = chvdocker
-	url = git@github.com:jefeweisen/chvdocker.git
+	url = https://github.com/jefeweisen/chvdocker.git
 	branch = master
