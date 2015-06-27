@@ -1,21 +1,29 @@
-How to rebuild docker container:
+# Docker deployment of the AI2 Pipeline
+
+## How to rebuild docker container:
 
     bash dockerbuild.sh
         . . .
         Successfully built aefd51ed88f3
 
-How to run a test command in the docker container:
+## How to run a test command in the docker container:
     bash dockerrun.sh /bin/sh
         / #
     exit
 
-How to install intellij Docker Integration:
+## How to install intellij Docker Integration:
 
-    Follow instructions at:
+    The IntelliJ 14 plugin is called "Docker Integration".
+
+    More details available:
 
         http://blog.jetbrains.com/idea/2015/03/docker-support-in-intellij-idea-14-1/
 
-How to connect intellij Docker Integration:
+## How to connect intellij Docker Integration:
+
+TODO: automate
+
+### Part 1: Create intellij output artifact
 
     - Select Project Settings | Artifacts
 
@@ -34,3 +42,7 @@ How to connect intellij Docker Integration:
                 dockerpipeline/project
             to
                 dockerpipeline/dockerbuild
+
+### Part 2: Create run configuration
+
+TODO
