@@ -45,4 +45,31 @@ TODO: automate
 
 ### Part 2: Create run configuration
 
-TODO
+    - On the top menu bar: Run | Edit Configurations
+
+    - Dialog box is titled Run/Debug Configurations
+
+        Add a configuration:
+
+            Click +
+
+            Select "Docker deployment"
+
+            Name: docker1
+            Server:
+                name: boot2docker_virtualbox_1-6-0
+                API URL: https://127.0.0.1:2376
+                Certificates folder: $HOME/.docker/docker_1.6.0
+                    ClientProtocolException
+            Image tag: dockerpipeline
+            Container name: containerfoo
+            Container settings: . . ./dockerpipeline/container_settings.json
+            Debug port: 4000
+                debug string will be automatically generated from port:
+                    -agentlib:jdwp=transport=dt_socket,address=4000,suspend=n,server=y
+                place in cmd in container_settings.json
+
+        Before launch:
+
+            - Add a "Build artifacts" step.
+                select dockerpipeline:jar
