@@ -1,29 +1,85 @@
-# Docker deployment of the AI2 Pipeline
+# Docker for AI2 Pipeline Applications
 
-## How to rebuild docker container:
+[The Allen-AI Pipeline Framework](https://github.com/jefeweisen/pipeline) ("AI2 Pipeline" or "AIP" for short) is a library for building reproducible data pipelines to support experimentation.
 
-    bash dockerbuild.sh
-        . . .
-        Successfully built aefd51ed88f3
+dockerpipeline is a startup kit for AIP.
 
-## How to run a test command in the docker container:
-    bash dockerrun.sh /bin/sh
-        / #
-    exit
+dockerpipeline integrates:
 
-## How to install intellij Docker Integration:
+  - docker, to containerize
+  - boot2docker to host the docker container
+  - virtualbox, to host boot2docker, and (through its file sharing) to support curation of data
+  - A sample program copied from AIP, to help you hit the ground running
 
-    The IntelliJ 14 plugin is called "Docker Integration".
+To minimize startup time, we include headless commands for installing matching versions of the prerequisite software.  We test the installations on OS X and Windows host machines.
 
-    More details available:
+### The AI2 Pipeline in a Docker container
 
-        http://blog.jetbrains.com/idea/2015/03/docker-support-in-intellij-idea-14-1/
+Reproducibility in data analysis means that behavior of the analysis has to be completely captured by the code and data that went into the analysis.  The Java Virtual Machine (JVM) sandboxes much behavior of AIP-based applications.  But AIP also supports external OS subprocesses as data producers.  For containing the variation of subprocess behavior, docker is a good fit.
 
-## How to connect intellij Docker Integration:
+The configured software package versions are tested together so that teams with mixed workstation operating systems can collaborate.  Mac OS, Windows, and Linux users can all share reproducible data science if each runs AIP in a Docker container.
 
-TODO: automate
+### Getting experimental work done inside a docker container
 
-### Part 1: Create intellij output artifact
+We recommend IntelliJ 14 in conjunction with its recent Docker Integration plugin.  The Docker Integration plugin automatically triggers "docker build", "docker run", and connection to the debugger every time you perform "Run | Debug".
+
+Access to an IDE can be more important when developing software inside containers.  Containers by their nature restrict activities like file editing, and software in containers often lacks much console user interface software.
+
+To get you started quickly, this docker integration comes with a copy of one of the AIP sample pipelines.  Upon building, this sample code will get you started writing AIP pipeline application code.
+
+## Prerequisites
+
+Required:
+- Vagrant (tested with version 1.7.2)
+- Virtualbox (tested with version 4.3.14)
+- Docker client (tested with version 1.6.0)
+- IntelliJ 14, with scala plugin.  Community Edition (free of cost) suffices.
+
+Recommended:
+- The IntelliJ Docker Integration plugin
+
+Optional alternative:
+- Bring your own docker container host, instead of using the integrated boot2docker build.
+
+Coming soon:
+- SBT command line build of the docker images.  Not yet supported.
+
+Workstations based on Mac OS and Microsoft Windows have been tested.  Headless install instructions for the dependencies on each are included in the documentation.  A build for boot2docker is provided so that teams with heterogenous workstation OSes can use the same Docker container host VM.
+
+### How to install IntelliJ Docker Integration:
+
+The Jetbrains Docker plugin for IntelliJ 14 is called "Docker Integration".  More details available at:
+
+http://blog.jetbrains.com/idea/2015/03/docker-support-in-intellij-idea-14-1/
+
+
+The Jetbrains Scala plugin for IntelliJ 14 is called "scala".
+
+
+## Installation
+
+
+### Step 1: Obtain the code
+
+Clone this repository.  Obtain the chvdocker repository through a submodule:
+
+    git submodule init
+    git submodule update
+
+AIP will be automatically integrated via maven.
+
+These repositories also contribute functionality behind the scenes:
+
+https://github.com/jefeweisen/chvdocker
+https://github.com/jefeweisen/boot2docker-vagrant-box
+
+
+### Step 2: Build
+
+Import build.sbt with IntelliJ.
+
+
+#### Create intellij output artifact
 
     - Select Project Settings | Artifacts
 
@@ -43,7 +99,7 @@ TODO: automate
             to
                 dockerpipeline/dockerbuild
 
-### Part 2: Create run configuration
+#### Create run configuration
 
     - On the top menu bar: Run | Edit Configurations
 
@@ -73,3 +129,16 @@ TODO: automate
 
             - Add a "Build artifacts" step.
                 select dockerpipeline:jar
+
+## Optional commands
+
+### How to rebuild docker container from the command line:
+
+    bash dockerbuild.sh
+        . . .
+        Successfully built aefd51ed88f3
+
+### How to run a test command in the docker container:
+    bash dockerrun.sh /bin/sh
+        / #
+    exit
