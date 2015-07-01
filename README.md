@@ -76,9 +76,14 @@ https://github.com/jefeweisen/boot2docker-vagrant-box
 
 ### Step 2: Build
 
+#### Option 1: From the command line
 
+    sbt assembly
+    bash tools/dockerbuild.sh
+    bash tools/dockerrun.sh java -jar /var/lib/dockerpipeline.jar
+    
 
-#### From Intellij
+#### Option 2: From Intellij
 
 Import build.sbt with IntelliJ.  Then:
 
@@ -116,16 +121,3 @@ Now create a run configuration:
 
             - Add a "Build artifacts" step.
                 select dockerpipeline:jar
-
-## Optional commands
-
-### How to rebuild docker container from the command line:
-
-    bash dockerbuild.sh
-        . . .
-        Successfully built aefd51ed88f3
-
-### How to run a test command in the docker container:
-    bash dockerrun.sh /bin/sh
-        / #
-    exit

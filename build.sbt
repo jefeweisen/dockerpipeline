@@ -20,9 +20,9 @@ libraryDependencies ++= Seq(
 // Declare to SBT we want to send .jar to docker during "packageBin"
 publishArtifact in (Compile, packageBin) := true
 
-mainClass in (Compile, packageBin) := Some("org.allenai.pipeline.examples.CountWordsAndLinesPipeline")
+mainClass in assembly := Some("org.allenai.pipeline.examples.CountWordsAndLinesPipeline")
 
-artifactPath in (Compile, packageBin) ~= { defaultPath =>
+assemblyOutputPath in assembly ~= { defaultPath =>
   file("./dockerbuild") / "dockerpipeline.jar"
 }
 
