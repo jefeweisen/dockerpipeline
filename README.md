@@ -106,11 +106,11 @@ Now create a run configuration:
                     ClientProtocolException
             Image tag: dockerpipeline
             Container name: containerfoo
-            Container settings: . . ./dockerpipeline/container_settings.json
+            Container settings: <your source code dir>/dockerpipeline/container_settings.json
             Debug port: 4000
                 debug string will be automatically generated from port:
                     -agentlib:jdwp=transport=dt_socket,address=4000,suspend=n,server=y
-                place in cmd in container_settings.json
+                (The matching agentlib string has already been placed in container_settings.json)
 
         Before launch:
 
