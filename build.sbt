@@ -10,8 +10,9 @@ val awsJavaSdk = "com.amazonaws" % "aws-java-sdk" % "1.8.9.1"
 
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "2.2.4" % "test",
-  "org.allenai" %% "pipeline-core" % aipipelineVersion withSources(),
-  "org.allenai" %% "pipeline-contrib" % aipipelineVersion withSources(),
+  "org.allenai" %% "pipeline-core" % aipipelineVersion withSources() excludeAll (
+    ExclusionRule(organization = "org.slf4j", name = "jcl-over-slf4j")
+  ),
   awsJavaSdk,
   "io.spray" %%  "spray-json" % "1.3.1"
 )
