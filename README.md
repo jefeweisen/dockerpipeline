@@ -76,30 +76,17 @@ https://github.com/jefeweisen/boot2docker-vagrant-box
 
 ### Step 2: Build
 
-Import build.sbt with IntelliJ.
 
 
-#### Create intellij output artifact
+#### From Intellij
 
-    - Select Project Settings | Artifacts
+Import build.sbt with IntelliJ.  Then:
 
-    - Click +
+    sbt setupIntellij
 
-    - Select JAR | from modules with dependencies
+The setupIntellij task tells intellij that it wants to send a .jar to docker via the dockerbuild/ directory.
 
-    - Fill dialog box:
-
-        - Module: <all modules>
-        - Main class: org.allenai.pipeline.examples.CountWordsAndLinesPipeline
-        - JAR files from libraries: extract to the target JAR
-        - Directory for META-INF/MANIFEST.MF
-            change
-
-                dockerpipeline/project
-            to
-                dockerpipeline/dockerbuild
-
-#### Create run configuration
+Now create a run configuration:
 
     - On the top menu bar: Run | Edit Configurations
 
