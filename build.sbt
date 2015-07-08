@@ -32,6 +32,6 @@ val setupIntellijTask = TaskKey[Unit]("setupIntellij", "hack: intellij sends jar
 
 setupIntellijTask <<= (baseDirectory, target, fullClasspath in Compile, packageBin in Compile, resources in Compile, streams) map {
   (baseDir, targetDir, cp, jar, res, s) => {
-    Util1.copy((baseDir / "intellij" / "dockerpipeline_jar.xml"), (baseDir / ".idea" / "artifacts"))
+    Util1.copy((baseDir / "config" / "dockerpipeline_jar.xml"), (baseDir / ".idea" / "artifacts"))
   }
 }
