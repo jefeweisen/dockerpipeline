@@ -11,6 +11,6 @@ shares:
   -
     host:
       isRelative: 1
-      path: chvdocker_data
+      path: ../chvdocker/chvdocker_data
     guest:
       path: /chvdocker_data
