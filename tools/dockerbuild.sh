@@ -8,5 +8,6 @@ cp config/application.conf src/main/resources/application.conf
 sbt assembly
 mkdir -p "$adirRepo/dockerbuild/dockerpipeline/script"
 cp -rf "$adirRepo/script" "$adirRepo/dockerbuild/dockerpipeline/script"
+bash "$adirRepo/tools/install_spark.sh"
 docker build -t dockerpipeline dockerbuild
 

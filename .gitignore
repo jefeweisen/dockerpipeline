@@ -3,3 +3,4 @@ target/
 .idea/
 dockerbuild/dockerpipeline.jar
 dockerbuild/dockerpipeline/
+tmp/
