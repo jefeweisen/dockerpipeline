@@ -11,6 +11,12 @@ shares:
   -
     host:
       isRelative: 1
-      path: ../chvdocker/chvdocker_data
+      path: ../moveme_pipeline-output
     guest:
-      path: /chvdocker_data
+      path: /pipeline-output
+  -
+    host:
+      isRelative: 1
+      path: ../moveme_curated-data
+    guest:
+      path: /curated-data
