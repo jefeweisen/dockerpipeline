@@ -4,3 +4,6 @@ target/
 dockerbuild/dockerpipeline.jar
 dockerbuild/dockerpipeline/
 tmp/
+moveme_pipeline-output/data/
+moveme_pipeline-output/summary/
+dry-run-output/
