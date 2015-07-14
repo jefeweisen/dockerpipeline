@@ -8,6 +8,8 @@ cp config/application.conf src/main/resources/application.conf
 sbt assembly
 rm -rf "$adirRepo/dockerbuild/dockerpipeline/script"
 cp -r "$adirRepo/script" "$adirRepo/dockerbuild/dockerpipeline/script"
-bash "$adirRepo/tools/install_spark.sh"
+# Spark binaries (e.g. spark-submit) install disabled.  For now, we're 
+# doing only java-main style spark, which can all come from maven.
+#bash "$adirRepo/tools/install_spark.sh"
 docker build -t dockerpipeline dockerbuild
 
