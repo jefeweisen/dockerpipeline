@@ -8,12 +8,14 @@ set -e  # stop on errors
 
 # configuration
 versionSpark="1.2.2"
-rnameSpark="spark-$versionSpark"
+flavorSpark="hadoop2.4"
+rnameSpark="spark-$versionSpark-bin-$flavorSpark"
 
 # derived configuration
 rfileSpark="$rnameSpark.tgz"
 #see also mirror selection: "http://www.apache.org/dyn/closer.cgi/spark/$rnameSpark/$rnameSpark.tgz"
-urlSpark="http://apache.arvixe.com/spark/$rnameSpark/$rnameSpark.tgz"
+urlMirror="http://supergsego.com/apache/spark"
+urlSpark="$urlMirror/$rnameSpark/$rfileSpark"
 adirTargetParent="$adirRepo/dockerbuild/dockerpipeline"
 adirTarget="$adirTargetParent/$rnameSpark"
 
