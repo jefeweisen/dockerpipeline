@@ -71,10 +71,10 @@ Clone this repository.  Obtain the chvdocker repository through a submodule:
 One-time dependency setup, including hosting for the docker container:
 
     tools/buildPipeline.sh  # build AIP
-    bash chvdocker/tools/virtualbox_image_download.sh
+    chvdocker/tools/virtualbox_image_download.sh
     tools/vagrant.sh up     # start a VM to host docker containers
     . chvdocker/tools/env.sh
-    bash tools/extract_my_docker_certs.sh
+    tools/extract_my_docker_certs.sh
     tools/dockerbuild.sh    # docker build will take longer the first time
     tools/vagrant.sh halt
 
