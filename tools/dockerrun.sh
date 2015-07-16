@@ -3,4 +3,10 @@ pushd $(dirname "$0") > /dev/null
 cd ..
 adirRepo=$(pwd)
 popd > /dev/null
-"$adirRepo/chvdocker/tools/dockerrun.sh" "$@"
+
+if [[ -z "$1" ]]
+then
+  "$adirRepo/chvdocker/tools/dockerrun.sh" dockerpipeline java -jar //var/lib/dockerpipeline.jar
+else
+  "$adirRepo/chvdocker/tools/dockerrun.sh" "$@"
+fi
