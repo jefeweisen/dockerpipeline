@@ -30,6 +30,8 @@ To get you started quickly, this docker integration comes with a copy of one of 
 ## Prerequisites
 
 Required:
+- JDK 7 or newer (tested with sun JDK 1.8.0_45)
+- SBT 0.13.5 or better (tested with 0.13.7)
 - Vagrant (tested with version 1.7.2)
 - Virtualbox (tested with version 4.3.14)
 - Docker client (tested with version 1.6.0)
@@ -59,14 +61,22 @@ The Jetbrains Scala plugin for IntelliJ 14 is called "scala".
 ## Installation
 
 
-### Step 1: Obtain the code
+### Step 1: Setup
 
 Clone this repository.  Obtain the chvdocker repository through a submodule:
 
     git submodule init
     git submodule update
 
-AIP will be automatically integrated via maven.
+One-time dependency setup, including hosting for the docker container:
+
+    tools/buildPipeline.sh  # build AIP
+    bash chvdocker/tools/virtualbox_image_download.sh
+    tools/vagrant.sh up     # start a VM to host docker containers
+    . chvdocker/tools/env.sh
+    bash tools/extract_my_docker_certs.sh
+    tools/dockerbuild.sh    # docker build will take longer the first time
+    tools/vagrant.sh halt
 
 These repositories also contribute functionality behind the scenes:
 
@@ -74,16 +84,37 @@ https://github.com/jefeweisen/chvdocker
 https://github.com/jefeweisen/boot2docker-vagrant-box
 
 
-### Step 2: Build
+### Step 2: Build/Run
 
-#### Option 1: From the command line
+To start and stop the vm, instead of using 'vagrant' by itself, use this wrapper script to keep the other pieces of dockerpipeline working together:
 
-    sbt assembly
-    bash tools/dockerbuild.sh
-    bash tools/dockerrun.sh java -jar /var/lib/dockerpipeline.jar
-    
+    tools/vagrant.sh up
+    tools/vagrant.sh halt
 
-#### Option 2: From Intellij
+#### Build/Run Option 1: From the command line
+
+    . chvdocker/tools/env.sh
+    tools/dockerbuild.sh
+    tools/dockerrun.sh
+
+Correct behavior of the sample code looks like this:
+
+    hello docker
+    22:02:34.297 [main] DEBUG o.a.pipeline.ProducerWithPersistence - CountWords computing value
+    22:02:34.305 [main] DEBUG o.a.pipeline.ProducerWithPersistence - CountWords reading from FileArtifact[/pipeline-output/data/CountWords.b74ef3a24d39b78f.json] using org.allenai.pipeline.SingletonIo@7efceaf5
+    22:02:34.349 [main] DEBUG o.a.pipeline.ProducerWithPersistence - CountWords returning value
+    22:02:34.355 [main] DEBUG o.a.pipeline.ProducerWithPersistence - CountLines computing value
+    22:02:34.362 [main] DEBUG o.a.pipeline.ProducerWithPersistence - CountLines reading from FileArtifact[/pipeline-output/data/CountLines.86026d37cd1ad494.txt] using org.allenai.pipeline.SingletonIo@16e6a1e5
+    22:02:34.364 [main] DEBUG o.a.pipeline.ProducerWithPersistence - CountLines returning value
+    22:02:34.368 [main] INFO  o.allenai.pipeline.Pipeline$$anon$3 - Ran pipeline in 0.078 s
+    22:02:34.645 [main] INFO  o.allenai.pipeline.Pipeline$$anon$3 - Summary written to /pipeline-output/summary/Count-words-and-lines-...html
+
+After a successful run, you should find a .html summary in the directory:
+
+    moveme_pipeline-output/summary/Count-words-and-lines-...html
+
+
+#### Build/Run Option 2: From Intellij
 
 Import build.sbt with IntelliJ.  Then:
 
