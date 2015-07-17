@@ -6,7 +6,7 @@ popd > /dev/null
 
 if [[ -z "$1" ]]
 then
-  "$adirRepo/chvdocker/tools/dockerrun.sh" dockerpipeline java -jar //var/lib/dockerpipeline.jar
+  bash "$adirRepo/chvdocker/tools/dockerrun.sh" dockerpipeline java -jar //var/lib/dockerpipeline.jar
 else
-  "$adirRepo/chvdocker/tools/dockerrun.sh" "$@"
+  bash "$adirRepo/chvdocker/tools/dockerrun.sh" "$@"
 fi
